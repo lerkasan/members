@@ -1,9 +1,12 @@
 package de.lerkasan.member.club.model;
 
+import de.lerkasan.member.club.annotation.UniqueEmail;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,13 +18,21 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty
+    @Pattern(regexp = "\\b([A-Z][a-z]+[-. ']{0,1}+[A-Za-z ]+[ .]{0,1})+$",
+            message = "Must start with a capital letter followed by lowercase letters, dot, space, hyphen, apostrophe. Should be at least three characters long.")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @NotEmpty
+    @Pattern(regexp = "\\b([A-Z][a-z]+[-. ']{0,1}+[A-Za-z ]+[ .]{0,1})+$",
+            message = "Must start with a capital letter followed by lowercase letters, dot, space, hyphen, apostrophe. Should be at least three characters long.")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Email
+    @NotEmpty
+    @UniqueEmail
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 

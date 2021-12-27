@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = UniqueEmailValidator.class)
 public @interface UniqueEmail {
 
-    String message() default "Member with this email is already in the club.";
+    String message() default "Member with this email is already in the club. Please enter another email.";
 
     Class<?>[] groups() default {};
 

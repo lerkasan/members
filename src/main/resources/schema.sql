@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS members (
     first_name          VARCHAR(100)    NOT NULL,
     last_name           VARCHAR(100)    NOT NULL,
     email               VARCHAR(100)    NOT NULL    UNIQUE,
-    registration_time   TIMESTAMP       NOT NULL    DEFAULT    CURRENT_TIMESTAMP(0)
+    registration_date   DATE            NOT NULL    DEFAULT    CURRENT_DATE
 );

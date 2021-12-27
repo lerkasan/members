@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -37,9 +37,9 @@ public class Member {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "registration_time", nullable = false)
+    @Column(name = "registration_date", nullable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP(0)")
-    private LocalDateTime registrationTime = LocalDateTime.now();
+    private LocalDate registrationDate = LocalDate.now();
 
     public Member() {
     }
@@ -76,12 +76,12 @@ public class Member {
         this.email = email;
     }
 
-    public LocalDateTime getRegistrationTime() {
-        return registrationTime;
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setRegistrationTime(LocalDateTime registrationTime) {
-        this.registrationTime = registrationTime;
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     @Override
@@ -94,12 +94,12 @@ public class Member {
         }
         Member member = (Member) o;
         return id == member.id && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) &&
-                Objects.equals(email, member.email) && Objects.equals(registrationTime, member.registrationTime);
+                Objects.equals(email, member.email) && Objects.equals(registrationDate, member.registrationDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, registrationTime);
+        return Objects.hash(id, firstName, lastName, email, registrationDate);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class Member {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", registrationTime=" + registrationTime +
+                ", registrationTime=" + registrationDate +
                 '}';
     }
 }

@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +37,7 @@ public class MemberServiceImplTest {
         dummyMember.setFirstName("Taras");
         dummyMember.setLastName("Shevchenko");
         dummyMember.setEmail("taras.shevchenko@mail.com");
-        dummyMember.setRegistrationTime(LocalDateTime.now());
+        dummyMember.setRegistrationDate(LocalDate.now());
     }
 
     @Test

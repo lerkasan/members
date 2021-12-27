@@ -28,7 +28,7 @@
             <th scope="row" th:text="${iStat.index + 1}"/>
             <td th:text = "${member.firstName + ' ' + member.lastName}"/>
             <td th:text="${member.email}"/>
-            <td th:text="${#temporals.format(member.registrationTime, 'dd-MM-yyyy')}"/>
+            <td th:text="${#temporals.format(member.registrationDate, 'dd-MM-yyyy')}"/>
         </tr>
     </table>
 </div>

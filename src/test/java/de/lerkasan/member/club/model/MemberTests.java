@@ -11,7 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -31,7 +31,7 @@ class MemberTests {
         dummyMember.setFirstName("Taras");
         dummyMember.setLastName("Shevchenko");
         dummyMember.setEmail("taras.shevchenko@mail.com");
-        dummyMember.setRegistrationTime(LocalDateTime.now());
+        dummyMember.setRegistrationDate(LocalDate.now());
     }
 
     @Test

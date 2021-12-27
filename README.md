@@ -6,6 +6,8 @@
 - H2 in-memory database
 - Maven
 
+### The project is deployed on AWS EC2 instance and is available on [http://lerkasan.de](http://lerkasan.de)
+
 ## How to start this project application locally
 
 System Prerequisites - Required software to be installed:

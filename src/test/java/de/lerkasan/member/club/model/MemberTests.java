@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -106,6 +107,24 @@ class MemberTests {
         assertEquals(input, violations.iterator().next().getInvalidValue());
     }
 
+    @Test
+    @Sql("/test-data.sql")
+    void validateEmailAvailableTest() {
+        dummyMember.setEmail("available@mail.com");
+        Set<ConstraintViolation<Member>> violations = validator.validate(dummyMember);
+        assertEquals(0, violations.size());
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideUnavailableEmail")
+    @Sql("/test-data.sql")
+    void validateEmailUnavailableTest(String input) {
+        dummyMember.setEmail(input);
+        Set<ConstraintViolation<Member>> violations = validator.validate(dummyMember);
+        assertEquals(1, violations.size());
+        assertEquals(input, violations.iterator().next().getInvalidValue());
+    }
+
     private static Stream<Arguments> provideInvalidName(){
         return Stream.of(
                 Arguments.of("invalid"),
@@ -198,6 +217,14 @@ class MemberTests {
                 Arguments.of("@"),
                 Arguments.of(" "),
                 Arguments.of("")
+        );
+    }
+
+    private static Stream<Arguments> provideUnavailableEmail(){
+        return Stream.of(
+                Arguments.of("unavailable@mail.com"),
+                Arguments.of("UNAVAILABLE@MAIL.COM"),
+                Arguments.of("unAvaiLabLe@mAiL.Com")
         );
     }
 }

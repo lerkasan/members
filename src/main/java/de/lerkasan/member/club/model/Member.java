@@ -20,25 +20,26 @@ public class Member {
 
     @NotEmpty
     @Pattern(regexp = "\\b([A-Z][a-z]+[-. ']{0,1}+[A-Za-z ]+[ .]{0,1})+$",
-            message = "Must start with a capital letter followed by lowercase letters, dot, space, hyphen, apostrophe. Should be at least three characters long.")
+            message = "First name must start with a capital letter followed by lowercase letters, dot, space, hyphen, apostrophe. First name should be at least three characters long.")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @NotEmpty
     @Pattern(regexp = "\\b([A-Z][a-z]+[-. ']{0,1}+[A-Za-z ]+[ .]{0,1})+$",
-            message = "Must start with a capital letter followed by lowercase letters, dot, space, hyphen, apostrophe. Should be at least three characters long.")
+            message = "Last name must start with a capital letter followed by lowercase letters, dot, space, hyphen, apostrophe. " +
+                    "Last name should be at least three characters long.")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Email
-    @NotEmpty
+    @Email(message = "Please enter valid email.")
+    @NotEmpty(message = "Please enter valid email.")
     @UniqueEmail
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "registration_time", nullable = false)
     @ColumnDefault(value = "CURRENT_TIMESTAMP(0)")
-    private LocalDateTime registrationTime;
+    private LocalDateTime registrationTime = LocalDateTime.now();
 
     public Member() {
     }

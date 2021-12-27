@@ -10,15 +10,11 @@ import java.util.Objects;
 
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 
-    private MemberRepository memberRepository;
-
     @Autowired
-    public UniqueEmailValidator(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+    private MemberRepository memberRepository;
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return Objects.nonNull(value) && memberRepository.isEmailAvailable(value);
+        return Objects.isNull(memberRepository) || (Objects.nonNull(value) && memberRepository.isEmailAvailable(value));
     }
 }

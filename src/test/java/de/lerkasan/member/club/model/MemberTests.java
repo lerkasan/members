@@ -54,7 +54,11 @@ class MemberTests {
         dummyMember.setFirstName(input);
         Set<ConstraintViolation<Member>> violations = validator.validate(dummyMember);
         assertEquals(1, violations.size());
-        assertEquals(input, violations.iterator().next().getInvalidValue());
+        ConstraintViolation<Member> error = violations.iterator().next();
+        assertEquals(input, error.getInvalidValue());
+        String expectedErrorMessage = "First name must start with a capital letter followed by lowercase letters, dot, space, hyphen, apostrophe. " +
+                "First name should be at least three characters long.";
+        assertEquals(expectedErrorMessage, error.getMessage());
     }
 
     @Test
@@ -68,7 +72,7 @@ class MemberTests {
     @ParameterizedTest
     @MethodSource("provideValidLastName")
     void validateValidLastName(String input) {
-        dummyMember.setFirstName(input);
+        dummyMember.setLastName(input);
         Set<ConstraintViolation<Member>> violations = validator.validate(dummyMember);
         assertEquals(0, violations.size());
     }
@@ -76,10 +80,14 @@ class MemberTests {
     @ParameterizedTest
     @MethodSource("provideInvalidLastName")
     void validateInvalidLastName(String input) {
-        dummyMember.setFirstName(input);
+        dummyMember.setLastName(input);
         Set<ConstraintViolation<Member>> violations = validator.validate(dummyMember);
         assertEquals(1, violations.size());
-        assertEquals(input, violations.iterator().next().getInvalidValue());
+        ConstraintViolation<Member> error = violations.iterator().next();
+        assertEquals(input, error.getInvalidValue());
+        String expectedErrorMessage = "Last name must start with a capital letter followed by lowercase letters, dot, space, hyphen, apostrophe. " +
+                "Last name should be at least three characters long.";
+        assertEquals(expectedErrorMessage, error.getMessage());
     }
 
     @Test
@@ -104,7 +112,10 @@ class MemberTests {
         dummyMember.setEmail(input);
         Set<ConstraintViolation<Member>> violations = validator.validate(dummyMember);
         assertEquals(1, violations.size());
-        assertEquals(input, violations.iterator().next().getInvalidValue());
+        ConstraintViolation<Member> error = violations.iterator().next();
+        assertEquals(input, error.getInvalidValue());
+        String expectedErrorMessage = "Please enter valid email.";
+        assertEquals(expectedErrorMessage, error.getMessage());
     }
 
     @Test
@@ -122,18 +133,10 @@ class MemberTests {
         dummyMember.setEmail(input);
         Set<ConstraintViolation<Member>> violations = validator.validate(dummyMember);
         assertEquals(1, violations.size());
-        assertEquals(input, violations.iterator().next().getInvalidValue());
-    }
-
-    private static Stream<Arguments> provideInvalidName(){
-        return Stream.of(
-                Arguments.of("invalid"),
-                Arguments.of("Invalid-"),
-                Arguments.of("Invalid352invalid"),
-                Arguments.of("Invalid--invalid"),
-                Arguments.of("Invalid@invalid"),
-                Arguments.of("Invalid  invalid")
-        );
+        ConstraintViolation<Member> error = violations.iterator().next();
+        assertEquals(input, error.getInvalidValue());
+        String expectedErrorMessage = "Member with this email is already in the club. Please enter another email.";
+        assertEquals(expectedErrorMessage, error.getMessage());
     }
 
     private static Stream<Arguments> provideValidFirstName(){

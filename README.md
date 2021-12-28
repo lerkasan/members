@@ -27,7 +27,7 @@ _**Useful links:**_
 
 2. Go to the folder with downloaded source code:
    
-   `cd member-club-task`
+   `cd members`
 
 
 3. Compile the source code and run tests using Maven Wrapper by typing a following command into command prompt (cmd for Windows or sh/bash for Linux):
